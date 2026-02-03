@@ -6,15 +6,14 @@ import os
 
 import paramiko
 
+from mcp_ssh_nas.config import get_settings
+
 
 class SSHClient:
     """Manages a paramiko SSH connection to the NAS.
 
-    Reads credentials from environment variables:
-    - NAS_HOST
-    - NAS_PORT (default: 22)
-    - NAS_USER
-    - NAS_PASSWORD
+    Reads configuration from environment variables (NAS_* prefix),
+    .env file, or explicit constructor parameters.
     """
 
     def __init__(
@@ -24,10 +23,11 @@ class SSHClient:
         user: str | None = None,
         password: str | None = None,
     ) -> None:
-        self.host = (host or os.environ.get("NAS_HOST", "")).strip()
-        self.port = port or int(os.environ.get("NAS_PORT", "22").strip())
-        self.user = (user or os.environ.get("NAS_USER", "")).strip()
-        self.password = (password or os.environ.get("NAS_PASSWORD", "")).strip()
+        settings = get_settings()
+        self.host = (host or settings.host).strip()
+        self.port = port or settings.port
+        self.user = (user or settings.user).strip()
+        self.password = (password or settings.password).strip()
         self._client: paramiko.SSHClient | None = None
 
     @property
