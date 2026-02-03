@@ -30,7 +30,7 @@ def _get_client() -> SSHClient:
 
 @mcp.tool
 def ssh_execute(command: str, timeout: int = 30) -> str:
-    """Execute a command on the NAS (10.85.30.127) via SSH. Use this to run shell commands, check system status, manage files, etc.
+    """Execute a command on the NAS via SSH. Use this to run shell commands, check system status, manage files, etc.
 
     Args:
         command: The shell command to execute on the NAS
