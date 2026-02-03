@@ -3,7 +3,7 @@ name = "mcp-ssh-nas"
 version = "0.1.0"
 description = "SSH NAS operations as Python library, LangChain tools, and MCP server"
 requires-python = ">=3.10"
-dependencies = ["paramiko>=3.0.0"]
+dependencies = ["paramiko>=3.0.0", "pydantic-settings>=2.0"]
 
 [project.optional-dependencies]
 mcp = ["fastmcp>=2.0.0"]
